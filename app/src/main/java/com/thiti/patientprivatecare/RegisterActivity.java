@@ -2,6 +2,7 @@ package com.thiti.patientprivatecare;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +70,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                             if (success.equals("1")) {
                                 Toast.makeText(RegisterActivity.this, "Register Success!", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterActivity.this, PatientRegisterActivity.class);
+                                intent.putExtra("email", email);
+                                startActivity(intent);
+                                finish();
                             }
 
 
@@ -103,5 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+
     }
+
 }
