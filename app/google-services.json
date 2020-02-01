@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "264404764216",
+    "firebase_url": "https://medical-care-b56ba.firebaseio.com",
+    "project_id": "medical-care-b56ba",
+    "storage_bucket": "medical-care-b56ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264404764216:android:69f6b2e68b199f722008cd",
+        "android_client_info": {
+          "package_name": "com.haerul.androidregisterandlogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264404764216-k96caj5g3mpmuu5las9gkel9glufqro5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haerul.androidregisterandlogin",
+            "certificate_hash": "13ac00827124cb102082b9de804a297097c2c654"
+          }
+        },
+        {
+          "client_id": "264404764216-ul4cqc13l68uoh285m0o1nbj1hb18o50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.haerul.androidregisterandlogin",
+            "certificate_hash": "162ea800f4276e9369da68e9d67ea1a6ff4a19a3"
+          }
+        },
+        {
+          "client_id": "264404764216-jeebucioktd1g7nb5rp99jlc1tsr3fvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcLypPNh9foO13ysl6ZkavoNpH_QUxDfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264404764216-jeebucioktd1g7nb5rp99jlc1tsr3fvc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264404764216:android:41337afe986edd192008cd",
+        "android_client_info": {
+          "package_name": "com.thiti.patientprivatecare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264404764216-qvma6ngn97fc3iblb7otmolp6apksdkc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thiti.patientprivatecare",
+            "certificate_hash": "13ac00827124cb102082b9de804a297097c2c654"
+          }
+        },
+        {
+          "client_id": "264404764216-jeebucioktd1g7nb5rp99jlc1tsr3fvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcLypPNh9foO13ysl6ZkavoNpH_QUxDfM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264404764216-jeebucioktd1g7nb5rp99jlc1tsr3fvc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

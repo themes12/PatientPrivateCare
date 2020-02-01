@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/textMedi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Add Medical"
+            android:gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/txtHour"
+            android:layout_below="@+id/textMedi"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Hour"
+            android:textSize="25sp"
+            android:inputType="textCapSentences"/>
+
+        <EditText
+            android:id="@+id/txtMin"
+            android:layout_below="@+id/txtHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Minute"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:inputType="textCapSentences"/>
+
+        <Button
+            android:id="@+id/btn_addMedical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtMin"
+            android:layout_marginTop="20dp"
+            android:text="add"/>
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
