@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id==R.id.menu_notificaion){
-            Toast.makeText(this,"Item Clicked" , Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            intent.putExtra("email", getId);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

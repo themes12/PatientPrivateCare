@@ -31,6 +31,8 @@ public class AddActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         txtHour = findViewById(R.id.txtHour);
         txtMinute = findViewById(R.id.txtMin);
         btn_send = findViewById(R.id.btn_addMedical);
