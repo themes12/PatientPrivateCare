@@ -22,9 +22,15 @@
             android:gravity="center"
             />
 
+        <Spinner
+            android:id="@+id/select"
+            android:layout_below="@+id/textMedi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <EditText
             android:id="@+id/txtHour"
-            android:layout_below="@+id/textMedi"
+            android:layout_below="@+id/select"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
