@@ -79,7 +79,7 @@ public class AddActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         Node = FirebaseDatabase.getInstance();
-        databaseDate = Node.getReference("medical");
+        databaseDate = Node.getReference("notification");
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
