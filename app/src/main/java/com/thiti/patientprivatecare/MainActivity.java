@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id==R.id.menu_notificaion){
-            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
             intent.putExtra("email", getId);
             startActivity(intent);
         }
