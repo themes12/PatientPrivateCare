@@ -46,9 +46,9 @@ public class HomeActivity extends AppCompatActivity {
     private Button btn_logout, btn_photo_upload;
     SessionManager sessionManager;
     String getId;
-    private static String URL_READ = "http://61.19.104.75/medical/read_detail.php";
-    private static String URL_EDIT = "http://61.19.104.75/medical/edit_detail.php";
-    private static String URL_UPLOAD = "http://61.19.104.75/medical/upload.php";
+    private static String URL_READ = "http://61.19.104.75/medical/read_detail.php?role=user";
+    private static String URL_EDIT = "http://61.19.104.75/medical/edit_detail.php?role=user";
+    private static String URL_UPLOAD = "http://61.19.104.75/medical/upload.php?role=user";
     private Menu action;
     private Bitmap bitmap;
     CircleImageView profile_image;
