@@ -42,7 +42,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName(); //getting the info
-    private TextView name, email;
+    private TextView name,email;
     private Button btn_logout, btn_photo_upload;
     SessionManager sessionManager;
     String getId;
@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
 
         HashMap<String, String> user = sessionManager.getUserDetail();
-        getId = user.get(sessionManager.ID);
+        getId = user.get(sessionManager.EMAIL);
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override

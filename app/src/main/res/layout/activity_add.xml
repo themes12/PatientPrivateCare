@@ -28,31 +28,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/txtHour"
+        <TimePicker
             android:layout_below="@+id/select"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Hour"
-            android:textSize="25sp"
-            android:inputType="textCapSentences"/>
-
-        <EditText
-            android:id="@+id/txtMin"
-            android:layout_below="@+id/txtHour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Minute"
-            android:textSize="25sp"
-            android:layout_marginTop="10dp"
-            android:inputType="textCapSentences"/>
+            android:id="@+id/timepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btn_addMedical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtMin"
+            android:layout_below="@+id/timepicker"
             android:layout_marginTop="20dp"
             android:text="add"/>
 

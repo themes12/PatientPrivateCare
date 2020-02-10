@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PatientActivity"></activity>
+        <activity android:name=".AppointmentActivity"></activity>
+        <activity
+            android:name=".PatientActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".Todo" />
         <activity
             android:name=".NotificationActivity"

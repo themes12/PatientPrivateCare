@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     intent.putExtra("email", getId);
                     startActivity(intent);
+                }else if (destination.getId() == R.id.nav_gallery){
+                    Intent intent = new Intent(MainActivity.this, PatientActivity.class);
+                    startActivity(intent);
+                }else if (destination.getId() == R.id.nav_slideshow) {
+                    Intent intent = new Intent(MainActivity.this, AppointmentActivity.class);
+                    startActivity(intent);
                 }
             }
         });

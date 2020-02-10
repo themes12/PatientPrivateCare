@@ -42,8 +42,7 @@ public class AddActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        txtHour = findViewById(R.id.txtHour);
-        txtMinute = findViewById(R.id.txtMin);
+
         btn_send = findViewById(R.id.btn_addMedical);
 
         mThaiSpinner = (Spinner) findViewById(R.id.select);
@@ -70,12 +69,44 @@ public class AddActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveMedicalData();
+                switch (select){
+                    case "schedule":
+                        saveMedicalData();
+                        break;
+                    case "Appointment time":
+                        saveAppointment();
+                        break;
+                    default:
+                }
             }
         });
     }
 
     private void saveMedicalData() {
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        Node = FirebaseDatabase.getInstance();
+        databaseDate = Node.getReference("medical");
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            userID = bundle.getString("email");
+        }
+        String sendHour = txtHour.getText().toString().trim();
+        String sendMin = txtMinute.getText().toString().trim();
+        String key = Node.getReference("quiz").push().getKey();
+
+        Date date = new Date(userID,select,sendHour,sendMin);
+
+        databaseDate.child(userID).child(key).setValue(date);
+        Toast.makeText(AddActivity.this,"Data Inserted", Toast.LENGTH_SHORT).show();
+        progressDialog.dismiss();
+        Intent intent = new Intent(AddActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void saveAppointment(){
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         Node = FirebaseDatabase.getInstance();
@@ -98,6 +129,7 @@ public class AddActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void createThaiClubData() {
 
         mThaiClub.add("schedule");

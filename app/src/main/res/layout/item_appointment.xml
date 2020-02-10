@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    <TextView
+        android:id="@+id/txtAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Appointment"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:id="@+id/txtHour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hour"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/txtAppointment"
+        />
+
+    <TextView
+        android:id="@+id/txtMin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Minute"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/txtHour"
+        />
+
+</RelativeLayout>
+
+</androidx.cardview.widget.CardView>

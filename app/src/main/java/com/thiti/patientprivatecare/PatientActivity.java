@@ -42,7 +42,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PatientActivity extends AppCompatActivity {
 
     private static final String TAG = PatientActivity.class.getSimpleName(); //getting the info
-    private TextView name, email;
+    private TextView ID,name, lastname,age,birthdate,address,stateID,disease,medicine,hospital;
     private Button btn_photo_upload;
     SessionManager sessionManager;
     String getId;
@@ -63,5 +63,340 @@ public class PatientActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         sessionManager.checkLogin();
 
+        ID = findViewById(R.id.patientID);
+        name = findViewById(R.id.patientName);
+        lastname = findViewById(R.id.patientLastName);
+        age = findViewById(R.id.patientAge);
+        birthdate = findViewById(R.id.patientBirthDate);
+        address = findViewById(R.id.patientAddress);
+        stateID = findViewById(R.id.patientState);
+        disease = findViewById(R.id.patientDisease);
+        medicine = findViewById(R.id.patientMedicine);
+        hospital = findViewById(R.id.patientHospital);
+        btn_photo_upload = findViewById(R.id.btn_photo);
+        profile_image = findViewById(R.id.profile_image);
+
+        HashMap<String, String> user = sessionManager.getUserDetail();
+        getId = user.get(sessionManager.EMAIL);
+
+        btn_photo_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseFile();
+            }
+        });
+    }
+
+    //getUserDetail
+    private void getUserDetail(){
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_READ,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.i(TAG, response.toString());
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("read");
+
+                            if (success.equals("1")){
+
+                                for (int i =0; i < jsonArray.length(); i++){
+
+                                    JSONObject object = jsonArray.getJSONObject(i);
+
+                                    String strID = object.getString("patientID").trim();
+                                    String strName = object.getString("name").trim();
+                                    String strLastname = object.getString("lastname").trim();
+                                    String strAge = object.getString("age").trim();
+                                    String strBirth = object.getString("birthdate").trim();
+                                    String strAddress = object.getString("address").trim();
+                                    String strState = object.getString("state_id").trim();
+                                    String strDisease = object.getString("disease").trim();
+                                    String strMedicine = object.getString("medicine").trim();
+                                    String strHospital = object.getString("hospital").trim();
+
+                                    ID.setText("ID : " + strID);
+                                    name.setText(strName);
+                                    lastname.setText(strLastname);
+                                    age.setText(strAge);
+                                    birthdate.setText(strBirth);
+                                    address.setText(strAddress);
+                                    stateID.setText(strState);
+                                    disease.setText(strDisease);
+                                    medicine.setText(strMedicine);
+                                    hospital.setText(strHospital);
+
+                                }
+
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(PatientActivity.this, "Error Reading Detail "+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(PatientActivity.this, "Error Reading Detail "+error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String > params = new HashMap<>();
+                params.put("id", getId);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUserDetail();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_action, menu);
+
+        action = menu;
+        action.findItem(R.id.menu_save).setVisible(false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_edit:
+
+                ID.setFocusableInTouchMode(true);
+                name.setFocusableInTouchMode(true);
+                lastname.setFocusableInTouchMode(true);
+                age.setFocusableInTouchMode(true);
+                birthdate.setFocusableInTouchMode(true);
+                address.setFocusableInTouchMode(true);
+                stateID.setFocusableInTouchMode(true);
+                disease.setFocusableInTouchMode(true);
+                medicine.setFocusableInTouchMode(true);
+                hospital.setFocusableInTouchMode(true);
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT);
+
+                action.findItem(R.id.menu_edit).setVisible(false);
+                action.findItem(R.id.menu_save).setVisible(true);
+
+                return true;
+
+            case R.id.menu_save:
+
+                SaveEditDetail();
+
+                action.findItem(R.id.menu_edit).setVisible(true);
+                action.findItem(R.id.menu_save).setVisible(false);
+
+                ID.setFocusableInTouchMode(false);
+                name.setFocusableInTouchMode(false);
+                lastname.setFocusableInTouchMode(false);
+                age.setFocusableInTouchMode(false);
+                birthdate.setFocusableInTouchMode(false);
+                address.setFocusableInTouchMode(false);
+                stateID.setFocusableInTouchMode(false);
+                disease.setFocusableInTouchMode(false);
+                medicine.setFocusableInTouchMode(false);
+                hospital.setFocusableInTouchMode(false);
+
+                ID.setFocusable(false);
+                name.setFocusable(false);
+                lastname.setFocusable(false);
+                age.setFocusable(false);
+                birthdate.setFocusable(false);
+                address.setFocusable(false);
+                stateID.setFocusable(false);
+                disease.setFocusable(false);
+                medicine.setFocusable(false);
+                hospital.setFocusable(false);
+
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    //save
+    private void SaveEditDetail() {
+
+        final String ID = this.ID.getText().toString().trim();
+        final String name = this.name.getText().toString().trim();
+        final String lastname = this.lastname.getText().toString().trim();
+        final String age = this.age.getText().toString().trim();
+        final String birthdate = this.birthdate.getText().toString().trim();
+        final String address = this.address.getText().toString().trim();
+        final String stateID = this.stateID.getText().toString().trim();
+        final String disease = this.disease.getText().toString().trim();
+        final String medicine = this.medicine.getText().toString().trim();
+        final String hospital = this.hospital.getText().toString().trim();
+        final String id = getId;
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_EDIT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if (success.equals("1")){
+                                Toast.makeText(PatientActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                                sessionManager.createSession(name, ID, id);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(PatientActivity.this, "Error "+ e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(PatientActivity.this, "Error "+ error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("email", ID);
+                params.put("id", id);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    private void chooseFile(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            try {
+
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                profile_image.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            UploadPicture(getId, getStringImage(bitmap));
+
+        }
+    }
+
+    private void UploadPicture(final String id, final String photo) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Uploading...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPLOAD,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.i(TAG, response.toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if (success.equals("1")){
+                                Toast.makeText(PatientActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progressDialog.dismiss();
+                            Toast.makeText(PatientActivity.this, "Try Again!"+e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(PatientActivity.this, "Try Again!" + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", id);
+                params.put("photo", photo);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+    }
+
+    public String getStringImage(Bitmap bitmap){
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+
+        byte[] imageByteArray = byteArrayOutputStream.toByteArray();
+        String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
+
+        return encodedImage;
     }
 }
